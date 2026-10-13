@@ -1,0 +1,20 @@
+# Runtime artefacts
+logs/
+*.log
+
+# Model weights (downloaded separately, ~30 GB)
+models/
+
+# Ascend kernel build cache produced in the working directory
+kernel_meta/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
