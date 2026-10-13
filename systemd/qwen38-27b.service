@@ -1,0 +1,23 @@
+[Unit]
+Description=Qwen3.8-27B-w8a8 OpenAI-compatible inference service (vLLM-Ascend)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Point these three settings at your own checkout / devices.
+WorkingDirectory=/opt/qwen3.8-27b-w8a8-serving
+Environment=FOREGROUND=1
+Environment=PORT=8000
+Environment=ASCEND_RT_VISIBLE_DEVICES=0,1,2,3
+ExecStart=/bin/bash /opt/qwen3.8-27b-w8a8-serving/start_server.sh
+ExecStop=/bin/bash /opt/qwen3.8-27b-w8a8-serving/stop_server.sh
+Restart=on-failure
+RestartSec=15
+TimeoutStartSec=1800
+TimeoutStopSec=120
+StandardOutput=append:/opt/qwen3.8-27b-w8a8-serving/logs/server.log
+StandardError=append:/opt/qwen3.8-27b-w8a8-serving/logs/server.log
+
+[Install]
+WantedBy=multi-user.target
